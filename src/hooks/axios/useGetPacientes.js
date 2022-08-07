@@ -11,6 +11,13 @@ export const useGetPacientes = () => {
     
     
     useEffect(() => {
+        const token = localStorage.getItem("token") || null;
+        console.log(token);
+        if(!token || !auth) {
+            setPacientes([]);
+            setIsLoading(false);
+            return;
+        }
         getPacientes()
         .then(resp => {
             setPacientes(resp)
