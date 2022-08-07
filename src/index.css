@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/*
+ * Base styles
+ */
+
+.content-form{
+    @apply mt-20 md:mt-5 shadow-lg p-5 rounded-xl bg-white;
+}
+
+.label {
+    @apply uppercase block text-gray-600 text-xl font-bold py-2;
+}
+
+.input {
+    @apply border w-full p-3 mt-3 bg-gray-50 rounded-xl focus:outline-indigo-600;
+}
+
+.input-submit{
+    @apply bg-indigo-700 w-full py-3 px-10 rounded-xl text-white uppercase font-bold cursor-pointer md:w-auto hover:bg-indigo-800;
+}
+
+.button-sumit{
+    @apply flex items-center bg-indigo-700 w-full py-3 px-10 rounded-xl text-white uppercase font-bold md:w-auto cursor-pointer hover:bg-indigo-800 disabled:cursor-not-allowed;
+}
+
+.link-form{
+    @apply block text-center text-gray-500 hover:text-indigo-800
+}
