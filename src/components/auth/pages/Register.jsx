@@ -68,7 +68,7 @@ export const Register = () => {
               type="text"
               className="input"
               autoComplete="off"
-              placeholder="Juanito peres"
+              placeholder="Juanito perez"
               name="name"
               value={formState.name}
               onChange={onInputChange}
