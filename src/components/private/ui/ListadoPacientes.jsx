@@ -10,7 +10,7 @@ export const ListadoPacientes = () => {
   if (isLoading) {
     return (
       <div className='items-center '>
-        <Spinner width="14" />
+        <Spinner width="w-14" height="h-14" />
       </div>
     )
   }
