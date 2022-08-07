@@ -1,12 +1,5 @@
 import { veterinaryApi } from "../api/axios";
 
-const headers = {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${localStorage.getItem("token")}`,
-}
-
-
-
 //Request Veterinario
 
 /**
@@ -18,11 +11,14 @@ export const getAuth = async () => {
     const { data } = await veterinaryApi({
         method: "GET",
         url: "/veterinario/profile",
-        headers
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+        }
     });
-    
+
     return data;
-    
+
 }
 
 /**
@@ -30,7 +26,7 @@ export const getAuth = async () => {
  * @param {*} token 
  * @returns 
  */
-export const getConfirmEmail = async(token) => {
+export const getConfirmEmail = async (token) => {
     const { data } = await veterinaryApi({
         method: "GET",
         url: `veterinario/confirm/${token}`,
@@ -43,7 +39,10 @@ export const putVeterinario = async (veterinario) => {
         method: "PUT",
         url: `veterinario/profile/${veterinario._id}`,
         data: veterinario,
-        headers,
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+        }
     });
 
     return data;
@@ -60,7 +59,10 @@ export const putPassword = async (password) => {
         method: "PUT",
         url: `veterinario/password`,
         data: password,
-        headers,
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+        }
     });
 
     return data;
@@ -73,15 +75,18 @@ export const putPassword = async (password) => {
  * Retorna todos los pacientes del veterinario
  * @returns {Promise<any>}
  */
-export const getPacientes = async() => {
+export const getPacientes = async (token) => {
     const { data } = await veterinaryApi({
         method: "GET",
         url: "/paciente",
-        headers,
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        }
     });
-    
+
     return data;
-    
+
 }
 
 /**
@@ -89,16 +94,19 @@ export const getPacientes = async() => {
  * @param {*} paciente 
  * @returns 
  */
-export const postPaciente = async(paciente) => {
+export const postPaciente = async (paciente) => {
     const { data } = await veterinaryApi({
         method: "POST",
         url: "/paciente",
-        headers,
-        data: paciente
+        data: paciente,
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+        }
     });
-    
+
     return data;
-    
+
 }
 
 /**
@@ -106,16 +114,19 @@ export const postPaciente = async(paciente) => {
  * @param {*} paciente
  * @returns 
  */
-export const putPaciente = async(paciente) => {
+export const putPaciente = async (paciente) => {
     const { data } = await veterinaryApi({
         method: "PUT",
         url: `/paciente/${paciente._id}`,
-        headers,
-        data: paciente
+        data: paciente,
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+        }
     });
-    
+
     return data;
-    
+
 }
 
 /**
@@ -123,13 +134,16 @@ export const putPaciente = async(paciente) => {
  * @param {*} id 
  * @returns 
  */
-export const deletePaciente = async(id) => {
+export const deletePaciente = async (id) => {
     const { data } = await veterinaryApi({
         method: "DELETE",
         url: `paciente/${id}`,
-            headers,
-        });
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+        }
+    });
 
-        return data;    
+    return data;
 }
 
