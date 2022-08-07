@@ -17,7 +17,7 @@ export const useGetPacientes = () => {
             setIsLoading(false);
             return;
         }
-        getPacientes(token)
+        getPacientes()
         .then(resp => {
             setPacientes(resp)
             setIsLoading(false);
