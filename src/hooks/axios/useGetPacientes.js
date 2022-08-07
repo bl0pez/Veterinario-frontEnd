@@ -7,10 +7,14 @@ export const useGetPacientes = () => {
     const { auth } = useAuth(); 
 
     const [pacientes, setPacientes] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState();
     
     
     useEffect(() => {
+
+        setIsLoading(true);
+
+
         const token = localStorage.getItem("token") || null;
         if(!token || !auth) {
             setPacientes([]);
