@@ -80,8 +80,8 @@ export const Login = () => {
         </div>
         <input 
           type="submit"
-          disabled={loading} 
-          className={'input-submit' (loading) ? 'bg-slate-400 cursor-progress' : 'bg-indigo-700'} 
+          disabled={loading}
+          className={`input-submit ${loading ? 'bg-slate-400 cursor-progress' : 'bg-indigo-700'}`} 
           value="Iniciar Sesión" />
       </form>
         <nav className='mt-5 lg:flex lg:justify-between'>
