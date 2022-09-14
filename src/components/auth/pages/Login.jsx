@@ -3,10 +3,12 @@ import { toast } from 'react-toastify';
 import { veterinaryApi } from '../../../api/axios';
 import { useAuth } from '../../../hooks/useAuth';
 import { useForm } from '../../../hooks/useForm';
+import { useSubmit } from '../../../hooks/useSubmit';
 
 export const Login = () => {
 
   const navigate = useNavigate();
+  const { data, loading, error, onSubmit} = useSubmit();
 
   const {formState, onInputChange, onResetForm} = useForm({
     email: '',
@@ -20,22 +22,22 @@ export const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    //TODO: validar formulario
-
-    veterinaryApi({
-      method: "post",
+    onSubmit({
       url: "/veterinario/login",
-      data:{
+      method: "post",
+      data: {
         email,
         password
       }
-    }).then(resp => {
-      localStorage.setItem('token', resp.data.token);
-      setAuth(resp.data);
-      navigate('/admin/pacientes', {replace: true});
-    }).catch(err => {
-      toast.error(err.response.data.message)
-    })
+    });
+
+    if(error){
+      toast.error(error);
+      return;
+    }
+
+    localStorage.setItem('token', resp.data.token);
+    navigate('/admin/pacientes', {replace: true});
 
 
   }
@@ -76,7 +78,11 @@ export const Login = () => {
             
             />
         </div>
-        <input type="submit" className="input-submit" value="Iniciar Sesión" />
+        <input 
+          type="submit"
+          disabled={loading} 
+          className={(loading) ? 'bg-slate-400 cursor-progress' : 'bg-indigo-700'} 
+          value="Iniciar Sesión" />
       </form>
         <nav className='mt-5 lg:flex lg:justify-between'>
           <Link to="/register" className="link-form">¿No tienes una cuenta? Regístrate</Link>

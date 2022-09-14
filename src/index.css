@@ -20,7 +20,7 @@
 }
 
 .input-submit{
-    @apply bg-indigo-700 w-full py-3 px-10 rounded-xl text-white uppercase font-bold cursor-pointer md:w-auto hover:bg-indigo-800;
+    @apply w-full py-3 px-10 rounded-xl text-white uppercase font-bold cursor-pointer md:w-auto hover:bg-indigo-800;
 }
 
 .button-sumit{
