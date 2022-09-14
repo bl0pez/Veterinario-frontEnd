@@ -1,6 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { veterinaryApi } from '../../../api/axios';
 import { useAuth } from '../../../hooks/useAuth';
 import { useForm } from '../../../hooks/useForm';
 import { useSubmit } from '../../../hooks/useSubmit';
@@ -37,6 +36,7 @@ export const Login = () => {
     }
 
     localStorage.setItem('token', resp.data.token);
+    setAuth(data);
     navigate('/admin/pacientes', {replace: true});
 
 
@@ -81,7 +81,7 @@ export const Login = () => {
         <input 
           type="submit"
           disabled={loading} 
-          className={(loading) ? 'bg-slate-400 cursor-progress' : 'bg-indigo-700'} 
+          className={'input-submit' (loading) ? 'bg-slate-400 cursor-progress' : 'bg-indigo-700'} 
           value="Iniciar Sesión" />
       </form>
         <nav className='mt-5 lg:flex lg:justify-between'>
