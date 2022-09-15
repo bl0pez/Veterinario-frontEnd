@@ -19,12 +19,11 @@ export const useSubmit = () => {
             url,
             data,
         }).then(resp => {
-            console.log(resp);
+            localStorage.setItem('token', resp.data.token);
             setData(resp.data);
             setLoading(false);
         }).catch(err => {
-            toast.error()
-            setError(err.response.data.message);
+            setError(err.message);
             setLoading(false);
         })
 

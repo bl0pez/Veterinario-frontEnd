@@ -1,14 +1,15 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useAuth } from "../../../hooks/useAuth";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { Spinner } from '../../';
+import { useContext } from "react";
+import { AuthContext } from "../../auth/context/AuthContext";
 
 export const PrivateLayout = () => {
 
-  const { auth, isLoading } = useAuth();
+  const { status, user } = useContext(AuthContext);
 
-  if(isLoading){
+  if(status === 'checking') {
     return (
       <div className="h-screen bg-gray-100 justify-center items-center flex">
         <Spinner width="w-24" height="h-24" />
@@ -19,7 +20,7 @@ export const PrivateLayout = () => {
   return (
     <>
       <Header />
-      {auth?._id ? (
+      {user ? (
         <main className="container mx-auto mt-10">
           <Outlet />
         </main>

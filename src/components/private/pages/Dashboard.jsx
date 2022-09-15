@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Formulario, ListadoPacientes } from './../../';
+import { Formulario } from './../../';
 
 
 export const Dashboard = () => {
@@ -19,7 +19,7 @@ export const Dashboard = () => {
         <Formulario />
       </div>
       <div className="md:w-1/2 lg:w-3/5">
-        <ListadoPacientes />
+        {/* <ListadoPacientes /> */}
       </div>
     </div>
     

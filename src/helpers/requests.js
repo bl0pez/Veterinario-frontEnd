@@ -2,6 +2,22 @@ import { veterinaryApi } from "../api/axios";
 
 //Request Veterinario
 
+export const request = async(options) => {
+    try {
+
+    const { data } = await veterinaryApi(
+        options
+    );
+
+    return data;
+
+
+    } catch (error) {
+        throw new Error(error.response.data.message);
+    }
+}
+
+
 /**
  * Verifica si el veterinario existe en la base de datos
  * y lo loguea en el sistema

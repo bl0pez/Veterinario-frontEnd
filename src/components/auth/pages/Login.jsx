@@ -1,42 +1,29 @@
+import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { useAuth } from '../../../hooks/useAuth';
 import { useForm } from '../../../hooks/useForm';
 import { useSubmit } from '../../../hooks/useSubmit';
+import { AuthContext } from '../context/AuthContext';
 
 export const Login = () => {
 
   const navigate = useNavigate();
   const { data, loading, error, onSubmit} = useSubmit();
 
-  const {formState, onInputChange, onResetForm} = useForm({
-    email: '',
-    password: ''
-  });
+  const { login } = useContext(AuthContext); 
 
-  const { setAuth } = useAuth();
+  const {formState, onInputChange, onResetForm} = useForm({
+    email: 'blopez4434@gmail.com',
+    password: '123456'
+  });
 
   const {email, password} = formState;
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    onSubmit({
-      url: "/veterinario/login",
-      method: "post",
-      data: {
-        email,
-        password
-      }
-    });
+    login(email, password);
 
-    if(error){
-      toast.error(error);
-      return;
-    }
 
-    localStorage.setItem('token', resp.data.token);
-    setAuth(data);
     navigate('/admin/pacientes', {replace: true});
 
 

@@ -1,9 +1,7 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
-import { useAuth } from "../../../hooks/useAuth";
+import { NavLink } from "react-router-dom";
 
 export const Header = () => {
-  const { cerrarSesion } = useAuth();
 
   return (
     <header className="py-10 bg-indigo-600">
@@ -36,7 +34,7 @@ export const Header = () => {
           <button
             type="button"
             className="text-white text-sm uppercase"
-            onClick={cerrarSesion}
+            onClick={() => console.log("Cerrar sesión")}
           >
             Cerrar sesión
           </button>
