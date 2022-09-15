@@ -19,6 +19,7 @@ export const useSubmit = () => {
             url,
             data,
         }).then(resp => {
+            console.log(resp);
             setData(resp.data);
             setLoading(false);
         }).catch(err => {
