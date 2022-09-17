@@ -1,12 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../../components/auth/context/AuthContext';
-import { getPacientes } from '../../helpers/requests';
+import { AuthContext } from '../../auth';
+import { getPacientes } from '../../helpers';
 
 export const useGetPacientes = () => {
 
     const auth = useContext(AuthContext); 
-
-    console.log(auth);
 
     const [pacientes, setPacientes] = useState(null);
     const [isLoading, setIsLoading] = useState();

@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { toast } from "react-toastify";
-import { veterinaryApi } from "../../../api/axios";
-import { useForm } from "../../../hooks/useForm";
+
+import { useForm } from "../../hooks";
+import { veterinaryApi } from '../../api';
 
 export const NewPasword = () => {
 

@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { toast } from 'react-toastify';
-import { AdminNav } from '../../';
-import { useAuth } from '../../../hooks/useAuth';
-import { useForm } from '../../../hooks/useForm';
+import { AdminNav } from '../';
+import { useForm } from '../../hooks/useForm';
+import { AuthContext } from '../../auth';
 
 export const EditarPerfil = () => {
 
-  const { auth, actualizarPerfil } = useAuth();
+  const { user } = useContext(AuthContext);
 
-  const { formState, onInputChange, onResetForm, } = useForm(auth);
+  const { formState, onInputChange, onResetForm, } = useForm(user);
 
   const { name, phone, email, website, _id } = formState;
 
@@ -22,7 +22,7 @@ export const EditarPerfil = () => {
       return;
     }
 
-    actualizarPerfil({ name, phone, email, website, _id });
+    //TODO: FUNCION PARA ACTUALIZAR PERFIL
 
   }
   

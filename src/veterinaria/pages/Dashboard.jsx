@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Formulario } from './../../';
+import { Formulario } from '../';
 
 
 export const Dashboard = () => {

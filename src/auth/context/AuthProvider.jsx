@@ -1,5 +1,6 @@
 import { useReducer } from "react";
-import { request } from "../../../helpers/requests";
+
+import { request } from "../../helpers";
 import { AuthReducer } from "./AuthReducer";
 import { AuthContext } from "./AuthContext";
 import { types } from "../types/types";

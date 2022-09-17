@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useForm } from '../../../hooks/useForm';
-import { useSubmit } from '../../../hooks/useSubmit';
-import { AuthContext } from '../context/AuthContext';
+
+import { AuthContext } from '../context';
+import { useForm, useSubmit } from '../../hooks';
 
 export const Login = () => {
 

@@ -1,4 +1,4 @@
-import { usePacientes } from "../../../hooks/usePacientes";
+import { usePacientes } from "../../hooks";
 
 export const Paciente = ({ paciente }) => {
 

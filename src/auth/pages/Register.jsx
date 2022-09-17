@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useForm } from "../../../hooks/useForm";
+import { useForm } from "../../hooks";
 
-import { veterinaryApi } from "../../../api/axios";
+import { veterinaryApi } from "../../api/axios";
 import { toast } from "react-toastify";
 
 export const Register = () => {

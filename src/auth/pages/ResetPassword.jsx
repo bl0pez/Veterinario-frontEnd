@@ -1,8 +1,7 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify';
-import { veterinaryApi } from '../../../api/axios';
-import { useForm } from '../../../hooks/useForm'
+import { veterinaryApi } from '../../api/axios';
+import { useForm } from '../../hooks/useForm';
 
 export const ResetPassword = () => {
 

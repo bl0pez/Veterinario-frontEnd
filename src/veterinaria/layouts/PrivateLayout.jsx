@@ -1,13 +1,12 @@
-import { Navigate, Outlet } from "react-router-dom";
-import { Footer } from "./Footer";
-import { Header } from "./Header";
-import { Spinner } from '../../';
 import { useContext } from "react";
+import { Navigate, Outlet } from "react-router-dom";
+import { Header, Footer } from "./";
+import { Spinner } from '../../ui/Spinner';
 import { AuthContext } from "../../auth/context/AuthContext";
 
 export const PrivateLayout = () => {
 
-  const { status, user } = useContext(AuthContext);
+  const { status } = useContext(AuthContext);
 
   if(status === 'checking') {
     return (
@@ -17,16 +16,16 @@ export const PrivateLayout = () => {
     );
   };
 
+  if(status === 'not-authenticated') {
+    <Navigate to="/" />
+  }
+
   return (
     <>
       <Header />
-      {user ? (
         <main className="container mx-auto mt-10">
           <Outlet />
         </main>
-      ) : (
-        <Navigate to="/" />
-      )}
       <Footer />
     </>
   );

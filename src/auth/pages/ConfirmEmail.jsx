@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
-import { useEmailConfirm } from '../../../hooks/axios/useEmailConfirm';
-import { AlertarEmail } from '../ui/AlertarEmail';
+import { useEmailConfirm } from '../../hooks/axios/useEmailConfirm';
+import { AlertarEmail } from '../ui';
 
 export const ConfirmEmail = () => {
   const { token } = useParams();

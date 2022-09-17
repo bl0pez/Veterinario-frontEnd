@@ -1,8 +1,8 @@
 import { createContext, useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { deletePaciente, postPaciente, putPaciente } from '../helpers/requests';
-import { useGetPacientes } from '../hooks/axios/useGetPacientes';
+import { deletePaciente, postPaciente, putPaciente } from '../../helpers';
+import { useGetPacientes } from '../../hooks/axios/useGetPacientes';
 
 const PacientesContext = createContext();
 

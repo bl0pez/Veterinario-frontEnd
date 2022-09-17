@@ -1,4 +1,5 @@
-import { usePacientes } from '../../../hooks/usePacientes'
+import { usePacientes } from '../../hooks';
+
 import { Spinner } from '../../ui/Spinner';
 import { Paciente } from './Paciente';
 

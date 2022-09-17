@@ -1,16 +1,16 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import {
-  AuthLayout,
   Dashboard,
   /*   CambiarPassword,
     ConfirmEmail,
     EditarPerfil, */
-  Login,
   PrivateLayout,
   /*   NewPasword,
     Register,
     ResetPassword, */
-} from '../components';
+} from '../veterinaria';
+
+import { AuthLayout,   Login,} from '../auth';
 
 
 

@@ -1,11 +1,8 @@
 import { toast } from "react-toastify";
-import { AdminNav } from "../../";
-import { useAuth } from "../../../hooks/useAuth";
-import { useForm } from "../../../hooks/useForm";
+import { AdminNav } from "../";
+import { useForm } from "../../hooks";
 
 export const CambiarPassword = () => {
-
-  const { cambiarPassword } = useAuth();
 
 
   const { formState, onInputChange, onResetForm } = useForm({
@@ -28,7 +25,7 @@ export const CambiarPassword = () => {
       return;
     }
 
-    cambiarPassword({ password, newPassword });
+    //TODO: FUNCION PARA CAMBIAR PASSWORD
 
     onResetForm();
 

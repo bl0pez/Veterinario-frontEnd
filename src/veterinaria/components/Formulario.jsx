@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { getLocalDate } from "../../../helpers/getLocalDate";
+import { getLocalDate } from "../../helpers";
 
-import { usePacientes } from "../../../hooks/usePacientes";
+import { usePacientes } from "../../hooks/usePacientes";
 
 export const Formulario = () => {
 
