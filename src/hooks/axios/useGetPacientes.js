@@ -1,17 +1,13 @@
-import { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../../auth';
+import { useState } from 'react';
 import { getPacientes } from '../../helpers';
 
 export const useGetPacientes = () => {
 
-    const auth = useContext(AuthContext); 
-
-    const [pacientes, setPacientes] = useState(null);
+    const [pacientes, setPacientes] = useState([]);
     const [isLoading, setIsLoading] = useState();
     
     
-    useEffect(() => {
-
+    const getPacintes = async () => {
         setIsLoading(true);
 
 
@@ -30,9 +26,10 @@ export const useGetPacientes = () => {
             setPacientes([]);
             setIsLoading(false);
         });
-    }, [auth]);
+    }
     
     return {
+        getPacintes,
         pacientes,
         setPacientes,
         isLoading

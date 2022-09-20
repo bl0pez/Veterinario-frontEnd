@@ -1,5 +1,3 @@
-import { usePacientes } from "../../hooks";
-
 export const Paciente = ({ paciente }) => {
 
   const { setPaciente, eliminarPaciente } = usePacientes();

@@ -1,14 +1,16 @@
-import { usePacientes } from '../../hooks';
-
+import { useContext } from 'react';
 import { Spinner } from '../../ui/Spinner';
+import { PacientesContext } from '../context';
 import { Paciente } from './Paciente';
 
 export const ListadoPacientes = () => {
 
   //importamos pacientes desde el context
-  const { pacientes, isLoading } = usePacientes();
+  const pacientes = useContext(PacientesContext);
+  
+  console.log(pacientes);
 
-  if (isLoading) {
+  if (true) {
     return (
       <div className='items-center '>
         <Spinner width="w-14" height="h-14" />
