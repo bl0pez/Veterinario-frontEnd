@@ -11,7 +11,13 @@ export const PacientesReducer = (state = {}, action) => {
             return {
                 ...state,
                 loading: false,
-                pacientes: [action.payload],
+                pacientes: [...action.payload],
+            };
+        case types.pacienteAddNew:
+            return {
+                ...state,
+                pacientes: [action.payload.newPaciente
+                    , ...state.pacientes],
             };
         default:
             return state;

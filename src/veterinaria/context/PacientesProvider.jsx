@@ -6,7 +6,7 @@ import { PacientesContext, PacientesReducer } from './';
 const init = () => {
   return {
     pacientes: [],
-    loading: false,
+    loading: true,
   }
 }
 
@@ -15,12 +15,6 @@ export const PacientesProvider = ({ children }) => {
   const [pacientes, dispatch] = useReducer(PacientesReducer, {}, init)
 
   const getPacientes = async () => {
-    const action = {
-      type: types.pacientesLoaded,
-    }
-
-    dispatch(action);
-
     const data = await request({
       url: 'paciente',
       headers: {
@@ -36,6 +30,28 @@ export const PacientesProvider = ({ children }) => {
 
   }
 
+  const addPaciente = async (paciente) => {
+
+    console.log(paciente);
+
+    const data = await request({
+      url: 'paciente',
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      data: paciente,
+    });
+
+    console.log(data);
+
+    dispatch({
+      type: types.pacienteAddNew,
+      payload: data,
+    });
+  }
+
   useEffect(() => {
     getPacientes();
   }, []);
@@ -45,6 +61,7 @@ export const PacientesProvider = ({ children }) => {
     <PacientesContext.Provider
     value={{
       ...pacientes,
+      addPaciente,
     }}
     >
       {children}

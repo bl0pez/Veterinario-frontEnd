@@ -1,20 +1,26 @@
-import { useContext } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { getLocalDate } from "../../helpers";
-import { useForm } from "../../hooks/useForm";
-import { PacientesContext } from "../context";
 
 export const Formulario = () => {
 
-  const { addPaciente } = useContext(PacientesContext);
+  const [name, setName] = useState("");
+  const [owner, setOwner] = useState("");
+  const [email, setEmail] = useState("");
+  const [date, setDate] = useState(getLocalDate(new Date()));
+  const [symptom, setSymptom] = useState("");
+  const [_id, setId] = useState(null);
 
-  const {name, owner, email, symptom, date, onInputChange} = useForm({
-    name: "",
-    owner: "",
-    email: "",
-    symptom: "",
-    date: getLocalDate(new Date()),
-  });
+  useEffect(() => {
+    if (paciente?.name) {
+      setName(paciente.name);
+      setOwner(paciente.owner);
+      setEmail(paciente.email);
+      setDate(getLocalDate(paciente.date));
+      setSymptom(paciente.symptom);
+      setId(paciente._id);
+    }
+  }, [paciente]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,9 +30,31 @@ export const Formulario = () => {
       return;
     }
 
-    addPaciente({ name, owner, email, symptom, date });
-    toast.success("Paciente agregado correctamente");
+    if (_id) {
+      editarPaciente({
+        name,
+        owner,
+        email,
+        date,
+        symptom,
+        _id,
+      });
+    } else {
+      agregarPaciente({
+        name,
+        owner,
+        email,
+        date,
+        symptom,
+        _id,
+      });
+    }
 
+    setName("");
+    setOwner("");
+    setEmail("");
+    setDate("");
+    setSymptom("");
 
   };
 
@@ -59,7 +87,7 @@ export const Formulario = () => {
             placeholder="Nombre mascota"
             name="name"
             value={name}
-            onChange={onInputChange}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
         <div className="my-5">
@@ -77,7 +105,7 @@ export const Formulario = () => {
             placeholder="Nombre propietario"
             name="owner"
             value={owner}
-            onChange={onInputChange}
+            onChange={(e) => setOwner(e.target.value)}
           />
         </div>
         <div className="my-5">
@@ -92,7 +120,7 @@ export const Formulario = () => {
             placeholder="Email del propietario"
             name="email"
             value={email}
-            onChange={onInputChange}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className="my-5">
@@ -106,7 +134,7 @@ export const Formulario = () => {
             placeholder="Nombre fecha"
             name="date"
             value={date}
-            onChange={onInputChange}
+            onChange={(e) => setDate(e.target.value)}
           />
         </div>
         <div className="my-5">
@@ -123,14 +151,14 @@ export const Formulario = () => {
             placeholder="Describe los Síntomas"
             name="symptom"
             value={symptom}
-            onChange={onInputChange}
+            onChange={(e) => setSymptom(e.target.value)}
           ></textarea>
         </div>
         <button
           type="submit"
           className="bg-indigo-600 w-full p-3 cursor-pointer text-white uppercase font-bold hover:bg-indigo-700 transition-colors"
         >
-          {false ? "Guardar Cambios" : "Agregar paciente"}
+          {_id ? "Guardar Cambios" : "Agregar paciente"}
         </button>
       </form>
     </>

@@ -6,11 +6,9 @@ import { Paciente } from './Paciente';
 export const ListadoPacientes = () => {
 
   //importamos pacientes desde el context
-  const pacientes = useContext(PacientesContext);
-  
-  console.log(pacientes);
+  const {pacientes, loading} = useContext(PacientesContext);
 
-  if (true) {
+  if (loading) {
     return (
       <div className='items-center '>
         <Spinner width="w-14" height="h-14" />
@@ -29,10 +27,7 @@ export const ListadoPacientes = () => {
 
         {
           pacientes.map((paciente) => (
-            <Paciente 
-              key={paciente._id}
-              paciente={paciente}
-            />
+            <Paciente key={paciente._id} paciente={paciente} />
           ))
         }
 

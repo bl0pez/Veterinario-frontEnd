@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Formulario } from "../components"
 import { ListadoPacientes } from "../components/ListadoPacientes"
 
 
@@ -16,7 +17,7 @@ export const Dashboard = () => {
         {mostrarFormulario ? "Ocultar formulario" : "Mostrar formulario"}
       </button>
       <div className={`${mostrarFormulario ? 'block': 'hidden' } md:block md:w-1/2 lg:w-2/5`}>
-        formulario
+        <Formulario />
       </div>
       <div className="md:w-1/2 lg:w-3/5">
         <ListadoPacientes />
