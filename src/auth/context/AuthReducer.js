@@ -8,7 +8,6 @@ export const AuthReducer = (state = {}, action) => {
             }
         case types.login:
             return {
-                ...state,
                 status: "authenticated",
                 logged: true,
                 user: action.payload,
@@ -17,6 +16,17 @@ export const AuthReducer = (state = {}, action) => {
             return {
                 status: "not-authenticated",
                 logged: false,
+            }
+        case types.authError:
+            return {
+                status: "not-authenticated",
+                logged: false,
+                error: action.payload,
+            }
+        case types.removeError:
+            return {
+                ...state,
+                error: null,
             }
         default:
             return state;

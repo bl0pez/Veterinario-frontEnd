@@ -2,19 +2,15 @@ import { veterinaryApi } from "../api/axios";
 
 //Request Veterinario
 
-export const request = async(options) => {
-    try {
+export const request = async (options) => {
 
-    const { data } = await veterinaryApi(
+    const data = await veterinaryApi(
         options
     );
 
     return data;
 
 
-    } catch (error) {
-        throw new Error(error.response.data.message);
-    }
 }
 
 

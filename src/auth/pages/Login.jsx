@@ -1,28 +1,31 @@
 import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
-import { AuthContext } from '../context';
 import { useForm, useSubmit } from '../../hooks';
+import { AuthContext } from '../context';
 
 export const Login = () => {
 
+  const { auth } = useContext(AuthContext);
+  const { onSubmit } = useSubmit();
+
   const navigate = useNavigate();
-  const { data, loading, error, onSubmit} = useSubmit();
 
-  const { login } = useContext(AuthContext); 
 
-  const {formState, onInputChange, onResetForm} = useForm({
+  const {email, password, formState, onInputChange, onResetForm} = useForm({
     email: 'blopez4434@gmail.com',
     password: '123456'
   });
 
-  const {email, password} = formState;
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    login(email, password);
+    onSubmit({
+      url: '/veterinario/login',
+      method: 'POST',
+      data: formState
+    });
 
+    if(auth.error) return;
 
     navigate('/admin/pacientes', {replace: true});
 
@@ -35,6 +38,8 @@ export const Login = () => {
       <h1 className="text-indigo-600 font-black text-6xl" >Inicia Sesión y administra tus pacientes</h1>
     </div>
     <div className='content-form'>
+      {/* muestra error en caso de que exista */}
+      { auth.error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-center">{auth.error}</div> }
       <form onSubmit={handleSubmit}>
         <div className='my-5'>
           <label className="label">
@@ -67,8 +72,8 @@ export const Login = () => {
         </div>
         <input 
           type="submit"
-          disabled={loading}
-          className={`input-submit ${loading ? 'bg-slate-400 cursor-progress' : 'bg-indigo-700 cursor-pointer hover:bg-indigo-800'}`} 
+          /* className={`input-submit ${loading ? 'bg-slate-400 cursor-progress' : 'bg-indigo-700 cursor-pointer hover:bg-indigo-800'}`} */ 
+          className="input-submit bg-indigo-700 cursor-pointer hover:bg-indigo-800"
           value="Iniciar Sesión" />
       </form>
         <nav className='mt-5 lg:flex lg:justify-between'>

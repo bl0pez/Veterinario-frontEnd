@@ -1,7 +1,11 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+
+import { NavLink } from 'react-router-dom';
+import { AuthContext } from '../../auth/context/AuthContext';
 
 export const Header = () => {
+
+  const { logout } = useContext(AuthContext);
 
   return (
     <header className="py-10 bg-indigo-600">
@@ -14,8 +18,7 @@ export const Header = () => {
           <NavLink
             to="/admin/pacientes"
             className={({ isActive }) =>
-              `text-white text-sm uppercase transition-all ${
-                isActive ? "text-indigo-200 border-b-2" : undefined
+              `text-white text-sm uppercase transition-all ${isActive ? "text-indigo-200 border-b-2" : undefined
               }`
             }
           >
@@ -24,9 +27,8 @@ export const Header = () => {
           <NavLink
             to="/admin/perfil"
             className={({ isActive }) =>
-            `text-white text-sm uppercase transition-all ${
-              isActive ? "text-indigo-200 border-b-2" : undefined
-            }`
+              `text-white text-sm uppercase transition-all ${isActive ? "text-indigo-200 border-b-2" : undefined
+              }`
             }
           >
             Perfil
@@ -34,7 +36,7 @@ export const Header = () => {
           <button
             type="button"
             className="text-white text-sm uppercase"
-            onClick={() => console.log("Cerrar sesión")}
+            onClick={logout}
           >
             Cerrar sesión
           </button>

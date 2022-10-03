@@ -1,44 +1,29 @@
 import { useReducer } from "react";
-
-import { request } from "../../helpers";
 import { AuthReducer } from "./AuthReducer";
 import { AuthContext } from "./AuthContext";
 import { types } from "../types/types";
 
+const initialState = {
+    logged: false,
+    user: null,
+    status: "not-authenticated",
+}
 
 export const AuthProvider = ({ children }) => {
 
-    const [auth, dispatch] = useReducer(AuthReducer, {});
+    const [auth, dispatch] = useReducer(AuthReducer, initialState);
 
-    const login = async (email, password) => {
-
-        dispatch({type: types.chekingCredentiasls});
-
-        const data = await request({
-            url: '/veterinario/login',
-            method: "POST",
-            data: {
-                email,
-                password
-            }
-        });
-
-        const action = {
-            type: types.login,
-            payload: data
-        }
-
-        localStorage.setItem('token', data.token);
-
-        dispatch(action);
-
+    const logout = () => {
+        localStorage.removeItem('token');
+        dispatch({ type: types.logout });
     }
 
     return (
         <AuthContext.Provider
             value={{
-                ...auth,
-                login
+                auth,
+                dispatch,
+                logout
             }}>
             {children}
         </AuthContext.Provider>

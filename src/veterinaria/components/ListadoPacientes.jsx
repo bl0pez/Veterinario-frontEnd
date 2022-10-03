@@ -6,7 +6,9 @@ import { Paciente } from './Paciente';
 export const ListadoPacientes = () => {
 
   //importamos pacientes desde el context
-  const {pacientes, loading} = useContext(PacientesContext);
+  const { loading, pacientes } = useContext(PacientesContext);
+
+  console.log(pacientes);
 
   if (loading) {
     return (
@@ -16,9 +18,9 @@ export const ListadoPacientes = () => {
     )
   }
 
-  if(pacientes.length > 0) {
-    return(
-        <>
+  if (!!pacientes) {
+    return (
+      <>
         <h2 className='font-black text-3xl text-center'>Listado Pacientes</h2>
         <p className='text-xl mt-5 mb-10 text-center'>
           Administra tus {''}
@@ -37,11 +39,11 @@ export const ListadoPacientes = () => {
 
   return (
     <>
-            <h2 className='font-black text-3xl text-center'>No hay Pacientes</h2>
-            <p className='text-xl mt-5 mb-10 text-center'>
-              Comienza agregando pacientes {''}
-              <span className='text-indigo-600 font-bold'>y parecerán en este lugar</span>
-            </p>
+      <h2 className='font-black text-3xl text-center'>No hay Pacientes</h2>
+      <p className='text-xl mt-5 mb-10 text-center'>
+        Comienza agregando pacientes {''}
+        <span className='text-indigo-600 font-bold'>y parecerán en este lugar</span>
+      </p>
     </>
   )
 }

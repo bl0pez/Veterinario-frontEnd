@@ -1,4 +1,4 @@
-import { types } from "../types/types";
+import { types } from '../types/types';
 
 export const PacientesReducer = (state = {}, action) => {
     switch (action.type) {
@@ -11,7 +11,7 @@ export const PacientesReducer = (state = {}, action) => {
             return {
                 ...state,
                 loading: false,
-                pacientes: [...action.payload],
+                pacientes: action.payload,
             };
         case types.pacienteAddNew:
             return {

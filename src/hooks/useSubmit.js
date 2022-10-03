@@ -1,18 +1,15 @@
-import { useMemo, useState } from "react";
+import { useContext, useEffect } from "react";
 import { veterinaryApi } from "../api/axios";
+import { AuthContext } from "../auth/context";
+import { types } from "../auth/types/types";
 
 export const useSubmit = () => {
-    const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+   
 
-    /**
-     * 
-     * Esta función se encarga de hacer la petición a la API
-     * 
-     */
+    const { auth, dispatch } = useContext(AuthContext);
+
     const onSubmit = ({ method, url, data }) => {
-        setLoading(true);
+        dispatch({ type: types.chekingCredentiasls });
 
         veterinaryApi({
             method,
@@ -20,27 +17,29 @@ export const useSubmit = () => {
             data,
         }).then(resp => {
             localStorage.setItem('token', resp.data.token);
-            setData(resp.data);
-            setLoading(false);
+            dispatch({
+                type: types.login,
+                payload: resp.data
+            });
         }).catch(err => {
-            setError(err.message);
-            setLoading(false);
+            dispatch({
+                type: types.authError,
+                payload: err.response.data.message
+            });
         })
 
     };
 
-    useMemo(() => {
-        setTimeout(() => {
-            setError(null);
-        }, 4000);
-    }, [error]);
+    useEffect(() => {
+        if(auth.error){
+            setTimeout(() => {
+                dispatch({ type: types.removeError });
+            }, 4000);
+        }
+    }, [auth.error]);
 
 
     return {
-        data,
-        loading,
-        error,
-
         //Methods
         onSubmit,
 
