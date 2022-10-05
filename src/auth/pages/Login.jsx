@@ -1,18 +1,19 @@
 import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useForm, useSubmit } from '../../hooks';
+
+import { useForm, useAuth } from '../../hooks';
 import { AuthContext } from '../context';
 
 export const Login = () => {
 
   const { auth } = useContext(AuthContext);
-  const { onSubmit } = useSubmit();
+  const { onSubmit } = useAuth();
 
   const navigate = useNavigate();
 
 
   const {email, password, formState, onInputChange, onResetForm} = useForm({
-    email: 'blopez4434@gmail.com',
+    email: 'prueba@gmail.com',
     password: '123456'
   });
 

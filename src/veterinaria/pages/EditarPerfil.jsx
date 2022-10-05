@@ -3,31 +3,38 @@ import { toast } from 'react-toastify';
 import { AdminNav } from '../';
 import { useForm } from '../../hooks/useForm';
 import { AuthContext } from '../../auth';
+import { useSubmit } from '../../hooks';
 
 export const EditarPerfil = () => {
 
-  const { user } = useContext(AuthContext);
+  const { auth } = useContext(AuthContext);
+  const { loading, data, error, onSubmit } = useSubmit();
 
-  const { formState, onInputChange, onResetForm, } = useForm(user);
-
-  const { name, phone, email, website, _id } = formState;
+  const { name, phone, email, website, formState, onInputChange, onResetForm, } = useForm(auth.user);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    console.log('Ejecutando el submit');
 
     if(name === '' || email === ''){
       toast.error("Campo nombre y email obligatorios");
       return;
     }
 
-    //TODO: FUNCION PARA ACTUALIZAR PERFIL
+    onSubmit({
+      url: `veterinario/profile/${auth.user._id}`,
+      method: 'PUT',
+      data:{
+        name,
+        phone,
+        email,
+        website,
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },});
 
   }
-  
-
-
 
   return (
     <>
@@ -86,7 +93,8 @@ export const EditarPerfil = () => {
             <input 
               type="submit"
               value="Guardar Cambios"
-              className="bg-indigo-700 px-10 py-3 font-bold mt-5 text-white rounded-lg uppercase w-full cursor-pointer"
+              className={`px-10 py-3 font-bold mt-5 text-white rounded-lg uppercase w-full ${loading ? "bg-gray-500 cursor-not-allowed" : "bg-indigo-700 hover:bg-indigo-600 cursor-pointer"}`}
+              disabled={loading}
              />
           </form>
         </div>

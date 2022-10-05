@@ -1,48 +1,34 @@
-import { useContext, useEffect } from "react";
+import { useState } from "react";
 import { veterinaryApi } from "../api/axios";
-import { AuthContext } from "../auth/context";
-import { types } from "../auth/types/types";
 
 export const useSubmit = () => {
    
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [data, setData] = useState(null);
 
-    const { auth, dispatch } = useContext(AuthContext);
+    const onSubmit = (parametros) => {
+        setLoading(true);
 
-    const onSubmit = ({ method, url, data }) => {
-        dispatch({ type: types.chekingCredentiasls });
-
-        veterinaryApi({
-            method,
-            url,
-            data,
-        }).then(resp => {
-            localStorage.setItem('token', resp.data.token);
-            dispatch({
-                type: types.login,
-                payload: resp.data
-            });
+        veterinaryApi(parametros)
+        .then(resp => {
+            console.log(resp);
+            setLoading(false);
+            setData(resp.data);
         }).catch(err => {
-            dispatch({
-                type: types.authError,
-                payload: err.response.data.message
-            });
-        })
+            setLoading(false);
+            setError(err.response.data.message);
+        });
 
-    };
 
-    useEffect(() => {
-        if(auth.error){
-            setTimeout(() => {
-                dispatch({ type: types.removeError });
-            }, 4000);
-        }
-    }, [auth.error]);
-
+    }
 
     return {
+        loading,
+        error,
+        data,
         //Methods
         onSubmit,
-
     }
 
 }

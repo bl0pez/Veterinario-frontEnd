@@ -8,7 +8,6 @@ export const ListadoPacientes = () => {
   //importamos pacientes desde el context
   const { loading, pacientes } = useContext(PacientesContext);
 
-  console.log(pacientes);
 
   if (loading) {
     return (

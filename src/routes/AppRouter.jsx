@@ -6,8 +6,7 @@ import { PublicRoutes } from '../auth/routes/PublicRoutes';
 import { PacientesProvider } from '../veterinaria/context';
 import { Spinner } from '../ui/Spinner';
 import { useEffect } from 'react';
-import { veterinaryApi } from '../api';
-import { types } from '../auth/types/types';
+import { useAuth } from '../hooks';
 
 
 
@@ -15,13 +14,21 @@ export const AppRouter = () => {
 
   const { auth, dispatch } = useContext(AuthContext);
 
+  const { onSubmit } = useAuth();
+
   useEffect(() => {
-    console.log("useEffect");
     const token = localStorage.getItem('token');
 
     if(!token) return;
 
-    dispatch({ type: types.chekingCredentiasls });
+    onSubmit({
+      url: '/veterinario/profile',
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }});
+
+    /* dispatch({ type: types.chekingCredentiasls });
 
     veterinaryApi({
       url: '/veterinario/profile',
@@ -38,7 +45,7 @@ export const AppRouter = () => {
       dispatch({
         type: types.logout
       })
-    })
+    }) */
   }, [] );
 
   if (auth.status === 'checking') {

@@ -1,14 +1,15 @@
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 
 import { AuthLayout } from '../layouts'
-import { Login } from '../pages'
+import { Login, Register } from '../pages'
 
 export const PublicRoutes = () => {
     return (
         <Routes>
-            <Route path="/*" element={<AuthLayout />}>
+            <Route path="/" element={<AuthLayout />}>
                 <Route index element={<Login />} />
-                <Route path='*' element={<Login />} />
+                <Route path="register" element={<Register />} />
+                <Route path='*' element={<Navigate to="/"/>} />
             </Route>
         </Routes>
     )
