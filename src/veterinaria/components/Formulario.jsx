@@ -1,27 +1,68 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { toast } from "react-toastify";
 import { veterinaryApi } from "../../api/axios";
 import { getLocalDate } from "../../helpers";
 import { useForm } from "../../hooks/useForm";
+import { useSubmit } from "../../hooks/useSubmit";
 import { PacientesContext } from "../context";
+
 
 export const Formulario = () => {
 
-  const { addPaciente } = useContext(PacientesContext);
+  const { addPaciente, paciente, updatePaciente } = useContext(PacientesContext);
 
-  const {name, owner, email, symptom, date, onInputChange, onResetForm} = useForm({
+  const {formState, name, owner, email, symptom, date, onInputChange, onResetForm, onSetFormState} = useForm({
     name: "",
-    owner: "",
+    owner: "", 
     email: "",
     symptom: "",
     date: getLocalDate(new Date()),
   });
+
+  useEffect(() => {
+    if (paciente) {
+      onSetFormState({
+        name: paciente.name,
+        owner: paciente.owner,
+        email: paciente.email,
+        symptom: paciente.symptom,
+        date: getLocalDate(new Date(paciente.date)),
+      });
+    }
+  }, [paciente]);
+
+
+  const { onSubmit, isLoding, error, data } = useSubmit();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (name === "" || owner === "" || email === "" || symptom === "") {
       toast.error("Todos los campos son obligatorios");
+      return;
+    }
+
+    if(paciente) {
+      
+      veterinaryApi({
+        url: `pacientes/${paciente._id}`,
+        method: "PUT",
+        data: formState,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        }
+      })
+    .then(({data}) => {
+      console.log(data);
+      toast.success("Paciente actualizado correctamente");
+      updatePaciente(data.paciente);
+      onResetForm();
+    }).catch(err => {
+      toast.error("Error al actualizar el paciente");
+    });
+
+
       return;
     }
 
@@ -143,7 +184,7 @@ export const Formulario = () => {
           type="submit"
           className="bg-indigo-600 w-full p-3 cursor-pointer text-white uppercase font-bold hover:bg-indigo-700 transition-colors"
         >
-          {false ? "Guardar Cambios" : "Agregar paciente"}
+          { !!paciente ? "Guardar Cambios" : "Agregar paciente"}
         </button>
       </form>
     </>

@@ -20,8 +20,6 @@ export const PacientesProvider = ({ children }) => {
 
   const [pacientes, dispatch] = useReducer(PacientesReducer, {}, init);
 
-  console.log(pacientes.pacientes);
-
   const getPacientes = async () => {
 
     const data = await request({
@@ -44,13 +42,12 @@ export const PacientesProvider = ({ children }) => {
 
   //Agregar un nuevo paciente
   const addPaciente = async (paciente) => {
+
     const action = {
       type: types.pacienteAddNew,  
-      payload: {
-        _id: auth.user._id,
-        ...paciente
-      },
+      payload: paciente
     }
+
 
     dispatch(action);
 
@@ -77,6 +74,27 @@ export const PacientesProvider = ({ children }) => {
 
   }
 
+  const updatePaciente = async (paciente) => {
+
+    const action = {
+      type: types.updatePaciente,
+      payload: paciente,
+    }
+
+    dispatch(action);
+  }
+
+  const setPaciente = (paciente) => {
+        
+      const action = {
+        type: types.pacienteSetActive,
+        payload: paciente
+      }
+  
+      dispatch(action);
+  
+  }
+
   useEffect(() => {
     getPacientes();
   }, []);
@@ -88,6 +106,8 @@ export const PacientesProvider = ({ children }) => {
         ...pacientes,
         addPaciente,
         removePaciente,
+        setPaciente,
+        updatePaciente,
       }}
     >
       {children}

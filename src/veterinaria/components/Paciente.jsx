@@ -3,7 +3,7 @@ import { PacientesContext } from "../context";
 
 export const Paciente = ({ paciente }) => {
 
-  const { removePaciente } = useContext(PacientesContext);
+  const { removePaciente, setPaciente } = useContext(PacientesContext);
 
   const { name, date, email, owner, symptom, _id } = paciente;
 
@@ -45,7 +45,7 @@ export const Paciente = ({ paciente }) => {
         <button
           type="button"
           className="py-2 px-10 bg-indigo-600 hover:bg-indigo-700 text-white uppercase font-bold rounded-lg"
-          onClick={() => {}}
+          onClick={() => setPaciente(paciente)}
         >
           Editar
         </button>

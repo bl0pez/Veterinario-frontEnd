@@ -1,27 +1,33 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { veterinaryApi } from "../api";
 
-export const useSubmit = () => {
+export const useSubmit = (argumentos) => {
   
     const [isLoding, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [data, setData] = useState(null);
+    const [data, setData] = useState([]);
 
-    const onSubmit = async (argumentos) => {
-        setIsLoading(true);
+    const submit = useMemo(() => {
+        const submit = async () => {
+            setIsLoading(true);
+            try {
+                const { data } = await veterinaryApi({
+                    ...argumentos,
+                });
+                setData(data);
+            } catch (error) {
+                setError(error);
+            }
+            setIsLoading(false);
+        };
+        return submit;
 
-        try{
-            const data = await veterinaryApi(argumentos);
-            setData(data);
-        }catch{
-            setError(error);
-        }
-        
-        setIsLoading(false);
-        
     }
 
-    return { onSubmit, isLoding, error, data };
+
+    , [argumentos]);
+
+    return { submit, isLoding, error, data };
 
 
 }

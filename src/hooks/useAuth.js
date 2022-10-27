@@ -24,7 +24,7 @@ export const useAuth = () => {
         }).catch(err => {
             dispatch({
                 type: types.authError,
-                payload: err.response.data.message
+                payload: err.response.data
             });
         });
     };

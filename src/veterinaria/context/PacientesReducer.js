@@ -18,8 +18,7 @@ export const PacientesReducer = (state = {}, action) => {
         case types.pacienteAddNew:
             return {
                 ...state,
-                pacientes: [action.payload
-                    , ...state.pacientes],
+                pacientes: [action.payload, ...state.pacientes],
             };
         // Elimina un paciente y actualiza la lista de pacientes
         case types.removePaciente:
@@ -29,6 +28,19 @@ export const PacientesReducer = (state = {}, action) => {
                     paciente => paciente._id !== action.payload
                 ),
             }
+        // Actualiza un paciente y actualiza la lista de pacientes
+        case types.updatePaciente:
+            return {
+                ...state,
+                pacientes: state.pacientes.map(
+                    paciente => (paciente._id === action.payload._id) ? action.payload : paciente
+                ),
+            }
+        case types.pacienteSetActive:
+            return {
+                ...state,
+                paciente: action.payload,
+            };
         default:
             return state;
     }
