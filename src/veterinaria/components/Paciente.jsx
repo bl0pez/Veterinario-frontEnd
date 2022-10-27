@@ -1,4 +1,10 @@
+import { useContext } from "react";
+import { PacientesContext } from "../context";
+
 export const Paciente = ({ paciente }) => {
+
+  const { removePaciente } = useContext(PacientesContext);
+
   const { name, date, email, owner, symptom, _id } = paciente;
 
   const formatearFecha = (fecha) => {
@@ -46,7 +52,7 @@ export const Paciente = ({ paciente }) => {
         <button
           type="button"
           className="py-2 px-10 bg-red-600 hover:bg-red-700 text-white uppercase font-bold rounded-lg"
-          onClick={() => {}}
+          onClick={() => removePaciente(_id)}
         >
           ELiminar
         </button>

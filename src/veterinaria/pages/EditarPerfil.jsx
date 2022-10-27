@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { toast } from 'react-toastify';
+
 import { AdminNav } from '../';
 import { useForm } from '../../hooks/useForm';
 import { AuthContext } from '../../auth';
@@ -10,7 +11,7 @@ export const EditarPerfil = () => {
   const { auth } = useContext(AuthContext);
   const { loading, data, error, onSubmit } = useSubmit();
 
-  const { name, phone, email, website, formState, onInputChange, onResetForm, } = useForm(auth.user);
+  const { name, phone, email, website, onInputChange, onResetForm, } = useForm(auth.user);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,8 +33,14 @@ export const EditarPerfil = () => {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
-      },});
-
+      },
+    });
+    
+    if(error){
+      toast.error("Error al actualizar el perfil");
+      return;
+    }
+    
   }
 
   return (

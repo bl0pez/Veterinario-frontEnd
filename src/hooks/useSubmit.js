@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { veterinaryApi } from "../api/axios";
 
 export const useSubmit = () => {
@@ -11,10 +11,9 @@ export const useSubmit = () => {
         setLoading(true);
 
         veterinaryApi(parametros)
-        .then(resp => {
-            console.log(resp);
+        .then(({ data }) => {
             setLoading(false);
-            setData(resp.data);
+            setData(data);
         }).catch(err => {
             setLoading(false);
             setError(err.response.data.message);
@@ -23,6 +22,13 @@ export const useSubmit = () => {
 
     }
 
+    useEffect(() => {
+        setTimeout(() => {
+            setError(null);
+        }, 4000);
+    }, [ error ]);
+
+
     return {
         loading,
         error,
@@ -30,5 +36,6 @@ export const useSubmit = () => {
         //Methods
         onSubmit,
     }
+
 
 }

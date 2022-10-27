@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { toast } from "react-toastify";
-import { veterinaryApi } from "../../api";
 import { getLocalDate } from "../../helpers";
+import { useSubmit } from "../../hooks";
 import { useForm } from "../../hooks/useForm";
 import { PacientesContext } from "../context";
 
@@ -25,20 +25,13 @@ export const Formulario = () => {
       return;
     }
 
-    veterinaryApi({
-      url: "/pacientes",
-      method: "POST",
-      data: {name, owner, email, symptom, date},
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      }
-    }).then(({data}) => {
-      toast.success("Paciente agregado correctamente");
-
-    }).catch(err => {
-      toast.error("Error al agregar el paciente");
-    });
+    addPaciente({
+      name,
+      owner,
+      email,
+      symptom,
+      date,
+    })
 
 
 
