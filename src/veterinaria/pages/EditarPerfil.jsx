@@ -4,12 +4,10 @@ import { toast } from 'react-toastify';
 import { AdminNav } from '../';
 import { useForm } from '../../hooks/useForm';
 import { AuthContext } from '../../auth';
-import { useSubmit } from '../../hooks';
 
 export const EditarPerfil = () => {
 
   const { auth } = useContext(AuthContext);
-  const { loading, data, error, onSubmit } = useSubmit();
 
   const { name, phone, email, website, onInputChange, onResetForm, } = useForm(auth.user);
 
@@ -21,7 +19,7 @@ export const EditarPerfil = () => {
       return;
     }
 
-    onSubmit({
+/*     onSubmit({
       url: `veterinario/profile/${auth.user._id}`,
       method: 'PUT',
       data:{
@@ -34,12 +32,12 @@ export const EditarPerfil = () => {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
       },
-    });
+    }); */
     
-    if(error){
+/*     if(error){
       toast.error("Error al actualizar el perfil");
       return;
-    }
+    } */
     
   }
 
@@ -100,8 +98,8 @@ export const EditarPerfil = () => {
             <input 
               type="submit"
               value="Guardar Cambios"
-              className={`px-10 py-3 font-bold mt-5 text-white rounded-lg uppercase w-full ${loading ? "bg-gray-500 cursor-not-allowed" : "bg-indigo-700 hover:bg-indigo-600 cursor-pointer"}`}
-              disabled={loading}
+/*               className={`px-10 py-3 font-bold mt-5 text-white rounded-lg uppercase w-full ${loading ? "bg-gray-500 cursor-not-allowed" : "bg-indigo-700 hover:bg-indigo-600 cursor-pointer"}`}
+              disabled={loading} */
              />
           </form>
         </div>

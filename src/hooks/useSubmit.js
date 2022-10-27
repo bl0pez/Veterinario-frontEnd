@@ -1,41 +1,27 @@
-import { useEffect, useState } from "react";
-import { veterinaryApi } from "../api/axios";
+import { useState } from "react";
+import { veterinaryApi } from "../api";
 
 export const useSubmit = () => {
-   
-    const [loading, setLoading] = useState(false);
+  
+    const [isLoding, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [data, setData] = useState(null);
 
-    const onSubmit = (parametros) => {
-        setLoading(true);
+    const onSubmit = async (argumentos) => {
+        setIsLoading(true);
 
-        veterinaryApi(parametros)
-        .then(({ data }) => {
-            setLoading(false);
+        try{
+            const data = await veterinaryApi(argumentos);
             setData(data);
-        }).catch(err => {
-            setLoading(false);
-            setError(err.response.data.message);
-        });
-
-
+        }catch{
+            setError(error);
+        }
+        
+        setIsLoading(false);
+        
     }
 
-    useEffect(() => {
-        setTimeout(() => {
-            setError(null);
-        }, 4000);
-    }, [ error ]);
-
-
-    return {
-        loading,
-        error,
-        data,
-        //Methods
-        onSubmit,
-    }
+    return { onSubmit, isLoding, error, data };
 
 
 }

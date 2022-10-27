@@ -44,19 +44,6 @@ export const PacientesProvider = ({ children }) => {
 
   //Agregar un nuevo paciente
   const addPaciente = async (paciente) => {
-
-    const data = await request({
-      url: 'pacientes',
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      data: paciente
-    });
-
-    console.log(data);
-    
     const action = {
       type: types.pacienteAddNew,  
       payload: {
