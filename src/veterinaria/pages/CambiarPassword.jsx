@@ -1,5 +1,6 @@
 import { toast } from "react-toastify";
 import { AdminNav } from "../";
+import { veterinaryApi } from "../../api";
 import { useForm } from "../../hooks";
 
 export const CambiarPassword = () => {
@@ -25,7 +26,22 @@ export const CambiarPassword = () => {
       return;
     }
 
-    //TODO: FUNCION PARA CAMBIAR PASSWORD
+    //Cambiar contraseña
+    veterinaryApi({
+      url: "veterinario/password",
+      method: "PUT",
+      data: formState,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then((res) => {
+        toast.success("Contraseña actualizada");
+      })
+      .catch((err) => {
+        toast.error("Error al actualizar la contraseña");
+      });
 
     onResetForm();
 

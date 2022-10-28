@@ -27,25 +27,6 @@ export const AppRouter = () => {
       headers: {
         'Authorization': `Bearer ${token}`
       }});
-
-    /* dispatch({ type: types.chekingCredentiasls });
-
-    veterinaryApi({
-      url: '/veterinario/profile',
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    }).then(({data}) => {
-      dispatch({
-        type: types.login,
-        payload: data
-      })
-    }).catch(err => {
-      dispatch({
-        type: types.logout
-      })
-    }) */
   }, [] );
 
   if (auth.status === 'checking') {

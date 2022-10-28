@@ -1,43 +1,46 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import { AdminNav } from '../';
 import { useForm } from '../../hooks/useForm';
 import { AuthContext } from '../../auth';
+import { veterinaryApi } from '../../api';
 
 export const EditarPerfil = () => {
 
   const { auth } = useContext(AuthContext);
 
-  const { name, phone, email, website, onInputChange, onResetForm, } = useForm(auth.user);
+  const { formState, name, phone, email, website, onInputChange } = useForm(auth.user);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    
     if(name === '' || email === ''){
       toast.error("Campo nombre y email obligatorios");
       return;
     }
 
-/*     onSubmit({
+    setLoading(true);
+    
+    veterinaryApi({
       url: `veterinario/profile/${auth.user._id}`,
       method: 'PUT',
-      data:{
-        name,
-        phone,
-        email,
-        website,
-      },
+      data: formState,
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
       },
-    }); */
-    
-/*     if(error){
-      toast.error("Error al actualizar el perfil");
-      return;
-    } */
+    })
+      .then((res) => {
+        toast.success("Perfil actualizado");
+        setLoading(false);
+      })
+      .catch((err) => {
+        toast.error("Error al actualizar el perfil");
+        setLoading(false);
+      });
+
     
   }
 
@@ -98,8 +101,8 @@ export const EditarPerfil = () => {
             <input 
               type="submit"
               value="Guardar Cambios"
-/*               className={`px-10 py-3 font-bold mt-5 text-white rounded-lg uppercase w-full ${loading ? "bg-gray-500 cursor-not-allowed" : "bg-indigo-700 hover:bg-indigo-600 cursor-pointer"}`}
-              disabled={loading} */
+              className={`px-10 py-3 font-bold mt-5 text-white rounded-lg uppercase w-full ${loading ? "bg-gray-500 cursor-not-allowed" : "bg-indigo-700 hover:bg-indigo-600 cursor-pointer"}`}
+              disabled={loading}
              />
           </form>
         </div>

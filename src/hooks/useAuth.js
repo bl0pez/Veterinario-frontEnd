@@ -22,9 +22,12 @@ export const useAuth = () => {
                 payload: resp.data
             });
         }).catch(err => {
+
+            console.log(err);
+
             dispatch({
                 type: types.authError,
-                payload: err.response.data
+                payload: err.response.data.message
             });
         });
     };

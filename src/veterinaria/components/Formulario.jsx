@@ -3,7 +3,6 @@ import { toast } from "react-toastify";
 import { veterinaryApi } from "../../api/axios";
 import { getLocalDate } from "../../helpers";
 import { useForm } from "../../hooks/useForm";
-import { useSubmit } from "../../hooks/useSubmit";
 import { PacientesContext } from "../context";
 
 
@@ -31,8 +30,6 @@ export const Formulario = () => {
     }
   }, [paciente]);
 
-
-  const { onSubmit, isLoding, error, data } = useSubmit();
 
   const handleSubmit = (e) => {
     e.preventDefault();
