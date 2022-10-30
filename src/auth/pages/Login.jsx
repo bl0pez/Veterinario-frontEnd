@@ -13,8 +13,8 @@ export const Login = () => {
 
 
   const {email, password, formState, onInputChange, onResetForm} = useForm({
-    email: 'prueba@gmail.com',
-    password: '123456'
+    email: '',
+    password: ''
   });
 
   const handleSubmit = (e) => {
