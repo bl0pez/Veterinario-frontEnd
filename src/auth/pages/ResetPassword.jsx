@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import { veterinaryApi } from '../../api/axios';
@@ -8,13 +9,20 @@ export const ResetPassword = () => {
   const { formState, onInputChange, onResetForm} = useForm({
     email: '',
   });
+
+  const [loading, setLoading] = useState(false);
   
   const {email} = formState;
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if(email === ''){
+      toast.error("Campo email obligatorio");
+      return;
+    }    
     
-    //TODO: crear validaciones
+    setLoading(true);
 
     veterinaryApi({
       method: "post",
@@ -25,7 +33,9 @@ export const ResetPassword = () => {
     }).then((resp) => {
       toast.success(resp.data.message);
       onResetForm();
+      setLoading(false);
     }).catch(err => {
+      setLoading(false);
       toast.error(err.response.data.message);
     });
 
@@ -52,7 +62,10 @@ export const ResetPassword = () => {
             onChange={onInputChange}
             />
         </div>
-        <input type="submit" className="input-submit" value="Enviar" />
+        <input 
+          type="submit" 
+          className={`${loading ? 'bg-gray-500 cursor-wait' : 'bg-indigo-600'} text-white font-bold py-2 px-4 rounded w-full cursor-pointer`}
+          value="Enviar" disabled={loading} />
       </form>
         <nav className='mt-5 lg:flex lg:justify-between'>
           <Link to="/" className="link-form">¿Ya tienes una cuenta? Inicia Sesión</Link>

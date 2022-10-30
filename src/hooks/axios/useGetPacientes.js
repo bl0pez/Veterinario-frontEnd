@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { getPacientes } from '../../helpers';
 
 export const useGetPacientes = () => {
 
@@ -17,7 +16,14 @@ export const useGetPacientes = () => {
             setIsLoading(false);
             return;
         }
-        getPacientes(token)
+        await veterinaryApi({
+            method: "GET",
+            url: "/paciente",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            }
+        })
         .then(resp => {
             setPacientes(resp)
             setIsLoading(false);

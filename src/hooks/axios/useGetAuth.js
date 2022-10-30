@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getAuth } from '../../helpers/requests';
+import { veterinaryApi } from '../../api';
 
 export const useAxiosAuth = () => {
 
@@ -14,7 +14,14 @@ export const useAxiosAuth = () => {
         }
 
         try {
-            const data = await getAuth();
+            const data = await veterinaryApi({
+                method: "GET",
+                url: "/veterinario/profile",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                }
+            });
             setAuth(data);
             setIsLoading(false);
         } catch (error) {

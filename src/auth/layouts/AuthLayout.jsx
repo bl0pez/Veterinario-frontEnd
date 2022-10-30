@@ -16,15 +16,6 @@ export const AuthLayout = () => {
       <main className="container mx-auto md:grid md:grid-cols-2 gap-12 p-5 pt-20 items-center">
         <Outlet />
       </main>
-
-
-      {/* {auth ? (
-        <Navigate to="/admin" />
-      ) : (
-        <main className="container mx-auto md:grid md:grid-cols-2 gap-12 p-5 pt-20 items-center">
-          <Outlet />
-        </main>
-      )} */}
     </>
   );
 };

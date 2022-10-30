@@ -51,7 +51,6 @@ export const Formulario = () => {
         }
       })
     .then(({data}) => {
-      console.log(data);
       toast.success("Paciente actualizado correctamente");
       updatePaciente(data.paciente);
       onResetForm();

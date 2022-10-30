@@ -1,7 +1,5 @@
-import { useContext } from 'react';
 import { useEffect, useReducer } from 'react';
-import { AuthContext } from '../../auth/context';
-import { request } from '../../helpers/requests';
+import { veterinaryApi } from '../../api';
 import { types } from '../types/types';
 import { PacientesContext, PacientesReducer } from './';
 
@@ -16,13 +14,11 @@ const init = () => {
 
 export const PacientesProvider = ({ children }) => {
 
-  const { auth } = useContext(AuthContext);
-
   const [pacientes, dispatch] = useReducer(PacientesReducer, {}, init);
 
   const getPacientes = async () => {
 
-    const data = await request({
+    const data = await veterinaryApi({
       url: 'pacientes',
       method: 'GET',
       headers: {
@@ -55,7 +51,7 @@ export const PacientesProvider = ({ children }) => {
 
   const removePaciente = async (id) => {
 
-    await request({
+    await veterinaryApi({
       url: `pacientes/${id}`,
       method: 'DELETE',
       headers: {

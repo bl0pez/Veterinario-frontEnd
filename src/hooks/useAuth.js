@@ -22,8 +22,13 @@ export const useAuth = () => {
                 payload: resp.data
             });
         }).catch(err => {
+            if(err.response.status === 403){
+                dispatch({
+                    type: types.logout
+                });
 
-            console.log(err);
+                return;
+            }
 
             dispatch({
                 type: types.authError,
