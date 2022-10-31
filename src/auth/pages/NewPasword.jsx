@@ -87,7 +87,7 @@ export const NewPasword = () => {
             onChange={onInputChange}
             />
         </div>
-        <input type="submit" className="input-submit" value="Enviar" />
+        <input type="submit" className="input-submit bg-indigo-700 cursor-pointer hover:bg-indigo-800" value="Enviar" />
       </form>
         <nav className='mt-5 lg:flex lg:justify-between'>
           <Link to="/" className="link-form">¿Ya tienes una cuenta? Inicia Sesión</Link>
