@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
 
 import { useForm, useAuth } from '../../hooks';
 import { AuthContext } from '../context';
@@ -12,13 +13,19 @@ export const Login = () => {
   const navigate = useNavigate();
 
 
-  const {email, password, formState, onInputChange, onResetForm} = useForm({
+  const {email, password, formState, onInputChange } = useForm({
     email: '',
     password: ''
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    //Validar formulario
+    if(email === '' || password === ''){
+      toast.error('Todos los campos son obligatorios');
+      return;
+    }
 
     onSubmit({
       url: '/veterinario/login',
