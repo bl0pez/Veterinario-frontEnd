@@ -6,27 +6,15 @@ import { PublicRoutes } from '../auth/routes/PublicRoutes';
 import { PacientesProvider } from '../veterinaria/context';
 import { Spinner } from '../ui/Spinner';
 import { useEffect } from 'react';
-import { useAuth } from '../hooks';
 
 
 
 export const AppRouter = () => {
 
-  const { auth, dispatch } = useContext(AuthContext);
-
-  const { onSubmit } = useAuth();
+  const { auth, startRevalidarSession } = useContext(AuthContext);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-
-    if(!token) return;
-
-    onSubmit({
-      url: '/veterinario/profile',
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }});
+    startRevalidarSession();
   }, [] );
 
   if (auth.status === 'checking') {

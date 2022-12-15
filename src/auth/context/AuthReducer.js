@@ -5,17 +5,23 @@ export const AuthReducer = (state = {}, action) => {
         case types.chekingCredentiasls:
             return {
                 status: "checking",
+                logged: false,
+                user: {},
+                messageError: undefined,
             }
         case types.login:
             return {
                 status: "authenticated",
                 logged: true,
                 user: action.payload,
+                messageError: undefined,
             }
         case types.logout:
             return {
                 status: "not-authenticated",
                 logged: false,
+                user: {},
+                messageError: action.payload,
             }
         case types.authError:
             return {
@@ -26,7 +32,7 @@ export const AuthReducer = (state = {}, action) => {
         case types.removeError:
             return {
                 ...state,
-                error: null,
+                messageError: undefined,
             }
         default:
             return state;

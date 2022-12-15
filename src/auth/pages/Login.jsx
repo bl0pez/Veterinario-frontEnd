@@ -1,22 +1,19 @@
 import { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { toast } from "react-toastify";
 
 import { useForm, useAuth } from '../../hooks';
 import { AuthContext } from '../context';
 
+const initialState = {
+  email: '',
+  password: ''
+}
+
 export const Login = () => {
+  const { auth, starLogin } = useContext(AuthContext);
 
-  const { auth } = useContext(AuthContext);
-  const { onSubmit } = useAuth();
-
-  const navigate = useNavigate();
-
-
-  const {email, password, formState, onInputChange } = useForm({
-    email: '',
-    password: ''
-  });
+  const {email, password, onInputChange } = useForm(initialState);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,16 +24,7 @@ export const Login = () => {
       return;
     }
 
-    onSubmit({
-      url: '/veterinario/login',
-      method: 'POST',
-      data: formState
-    });
-
-    if(auth.error) return;
-
-    navigate('/admin/pacientes', {replace: true});
-
+    starLogin({email, password});
 
   }
 
@@ -47,7 +35,7 @@ export const Login = () => {
     </div>
     <div className='content-form'>
       {/* muestra error en caso de que exista */}
-      { auth.error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-center">{auth.error}</div> }
+      { auth.messageError && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-center">{auth.messageError}</div> }
       <form onSubmit={handleSubmit}>
         <div className='my-5'>
           <label className="label">
@@ -80,7 +68,6 @@ export const Login = () => {
         </div>
         <input 
           type="submit"
-          /* className={`input-submit ${loading ? 'bg-slate-400 cursor-progress' : 'bg-indigo-700 cursor-pointer hover:bg-indigo-800'}`} */ 
           className="input-submit bg-indigo-700 cursor-pointer hover:bg-indigo-800"
           value="Iniciar Sesión" />
       </form>

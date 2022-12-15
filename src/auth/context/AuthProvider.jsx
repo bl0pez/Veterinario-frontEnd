@@ -1,29 +1,26 @@
-import { useReducer } from "react";
-import { AuthReducer } from "./AuthReducer";
 import { AuthContext } from "./AuthContext";
 import { types } from "../types/types";
-
-const initialState = {
-    logged: false,
-    user: null,
-    status: "not-authenticated",
-}
+import { useAuth } from "../../hooks";
+import { useState } from "react";
 
 export const AuthProvider = ({ children }) => {
 
-    const [auth, dispatch] = useReducer(AuthReducer, initialState);
+    const [dispatch, setDispatch] = useState();
 
-    const logout = () => {
-        localStorage.removeItem('token');
-        dispatch({ type: types.logout });
-    }
+    const { auth, starLogin, startRevalidarSession, logout } = useAuth();
 
     return (
         <AuthContext.Provider
             value={{
+                //State
                 auth,
                 dispatch,
-                logout
+                
+                //Metodos
+                starLogin,
+                startRevalidarSession,
+                logout,
+
             }}>
             {children}
         </AuthContext.Provider>

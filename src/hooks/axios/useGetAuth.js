@@ -7,7 +7,6 @@ export const useAxiosAuth = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     const getAuthAsync = async (token) => {
-
         if (!token) {
             setIsLoading(false);
             return;
