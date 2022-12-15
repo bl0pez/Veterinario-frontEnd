@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from "react-toastify";
 
-import { useForm, useAuth } from '../../hooks';
+import { useForm } from '../../hooks';
 import { AuthContext } from '../context';
 
 const initialState = {
@@ -43,7 +43,6 @@ export const Login = () => {
           </label>
           <input 
             className="input" 
-            autoComplete='off' 
             type="email" 
             placeholder="prueba@gmail.com" 
             name='email'

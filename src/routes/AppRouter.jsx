@@ -15,7 +15,7 @@ export const AppRouter = () => {
 
   useEffect(() => {
     startRevalidarSession();
-  }, [] );
+  }, []);
 
   if (auth.status === 'checking') {
     return (
@@ -28,15 +28,19 @@ export const AppRouter = () => {
     );
   }
 
-  if (auth.status === 'authenticated') {
-    return (
-      <PacientesProvider >
-        <PrivateRoutes />
-      </PacientesProvider>
-    )
-  }
-
   return (
-    <PublicRoutes />
+    <>
+      {
+        auth.status === 'authenticated'
+          ? (
+            <PacientesProvider >
+              <PrivateRoutes />
+            </PacientesProvider>
+          )
+          : (
+            <PublicRoutes />
+          )
+      }
+    </>
   );
 };
