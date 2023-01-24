@@ -56,7 +56,7 @@ export const Register = () => {
   return (
     <>
       <div className="p-4">
-        <h1 className="text-indigo-600 font-black text-6xl">
+        <h1 className="text-indigo-600 font-black md:text-6xl text-4xl">
           Crea tu cuenta y administra tus Pacientes
         </h1>
       </div>

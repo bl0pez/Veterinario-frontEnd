@@ -17,6 +17,7 @@ export const AuthReducer = (state = {}, action) => {
                 messageError: undefined,
             }
         case types.logout:
+            localStorage.removeItem('token');
             return {
                 status: "not-authenticated",
                 logged: false,

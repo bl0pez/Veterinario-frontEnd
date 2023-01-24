@@ -44,7 +44,7 @@ export const ResetPassword = () => {
   return (
     <>
     <div className='p-4'>
-      <h1 className="text-indigo-600 font-black text-6xl" >Ingresa tu email para recuperar contraseña</h1>
+      <h1 className="text-indigo-600 font-black md:text-6xl text-4xl" >Ingresa tu email para recuperar contraseña</h1>
     </div>
     <div className='content-form'>
       <form onSubmit={handleSubmit}>

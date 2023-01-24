@@ -1,11 +1,7 @@
-import { AuthContext } from "./AuthContext";
-import { types } from "../types/types";
-import { useAuth } from "../../hooks";
-import { useState } from "react";
+import { AuthContext } from './AuthContext';
+import { useAuth } from '../../hooks';
 
 export const AuthProvider = ({ children }) => {
-
-    const [dispatch, setDispatch] = useState();
 
     const { auth, starLogin, startRevalidarSession, logout } = useAuth();
 
@@ -14,7 +10,6 @@ export const AuthProvider = ({ children }) => {
             value={{
                 //State
                 auth,
-                dispatch,
                 
                 //Metodos
                 starLogin,

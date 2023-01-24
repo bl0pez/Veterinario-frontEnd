@@ -31,7 +31,7 @@ export const Login = () => {
   return (
     <>
     <div className='p-4'>
-      <h1 className="text-indigo-600 font-black text-6xl" >Inicia Sesión y administra tus pacientes</h1>
+      <h1 className="text-indigo-600 font-black md:text-6xl text-4xl" >Inicia Sesión y administra tus pacientes</h1>
     </div>
     <div className='content-form'>
       {/* muestra error en caso de que exista */}

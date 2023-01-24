@@ -55,7 +55,7 @@ export const NewPasword = () => {
   return (
     <>
     <div className='p-4'>
-      <h1 className="text-indigo-600 font-black text-6xl" >Restablece tu password y no Pierdas Acesso a tus pacientes</h1>
+      <h1 className="text-indigo-600 font-black md:text-6xl text-4xl" >Restablece tu password y no Pierdas Acesso a tus pacientes</h1>
     </div>
     <div className='content-form'>
       <form onSubmit={handleSubmit}>

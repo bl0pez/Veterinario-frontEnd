@@ -60,7 +60,6 @@ export const useAuth = () => {
         ).then(resp => {
             dispatch({ type: types.login, payload: resp.data });
         }).catch(err => {
-            console.log(err);
             dispatch({ type: types.logout });
         });
 
